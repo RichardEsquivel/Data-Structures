@@ -14,12 +14,19 @@ class Queue:
 
        # self.storage with doubly linked list that we are using to implement a queue data structure
         self.storage = DoublyLinkedList()
+    # size of list will increase by one and will enqueue by adding to the tail as dequeue will implement a First In First Out Manner
 
     def enqueue(self, value):
-        pass
+        self.storage.add_to_tail(value)
+        self.size += 1
+    # dequeue will follow first in first out and will take from the head, first we check that there are values stored in the list
 
     def dequeue(self):
-        pass
+        if self.size > 0:
+            self.size -= 1
+            return self.storage.remove_from_head()
+        else:
+            return None
 
     def len(self):
-        pass
+        return self.size
