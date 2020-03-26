@@ -29,7 +29,6 @@ class LRUCache:
             self.storage.move_to_front(node)
             # Return the value at the 1 index or the actual value as 0 should hold prev value in a doubly linked list
             return node.value[1]
-            print(node.value[0])
         else:
             return None
 
