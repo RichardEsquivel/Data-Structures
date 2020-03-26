@@ -29,6 +29,7 @@ class LRUCache:
             self.storage.move_to_front(node)
             # Return the value at the 1 index or the actual value as 0 should hold prev value in a doubly linked list
             return node.value[1]
+            print(node.value[0])
         else:
             return None
 
@@ -44,4 +45,14 @@ class LRUCache:
     """
 
     def set(self, key, value):
-        pass
+        # check if the key passed already exists, if so delete the stored value to update at the end
+        if key in self.dict:
+            self.storage.delete(self.dict[key])
+        # check if limit has been reached and if so removed oldest node from tail
+        elif len(self.storage) >= self.limit:
+            node = self.storage.remove_from_tail()
+            # delete oldest entry
+            del self.dict[node[0]]
+        # add this new value to the head of the list and make updated key in dictionary for reference
+        self.storage.add_to_head((key, value))
+        self.dict[key] = self.storage.head
